@@ -1,301 +1,190 @@
 <template>
-	<div>
+  <div>
+    <div class="container"
+         :style='{"minHeight":"100vh","alignItems":"center","background":"url(http://codegen.caihongy.cn/20220722/2f46ada029f940ea97c168e76044ca4d.png)","display":"flex","width":"100%","backgroundSize":"cover","backgroundPosition":"center center","backgroundRepeat":"no-repeat","justifyContent":"center"}'>
+      <el-form v-if="pageFlag=='register'"
+               :style='{"padding":"20px","boxShadow":"0px 4px 10px 0px rgba(0,0,0,0.3020)","margin":"0","borderRadius":"10px","background":"#fff","width":"500px","height":"auto"}'
+               ref="rgsForm" class="rgs-form" :model="rgsForm">
+        <div v-if="true"
+             :style='{"padding":"10px 20px","margin":"10px 0 20px 0","color":"#000","textAlign":"center","width":"100%","lineHeight":"44px","fontSize":"24px","fontWeight":"600"}'
+             class="title">基于springboot的记帐系统注册
+        </div>
+        <button
+            :style='{"border":"0","cursor":"pointer","padding":"0 10px","boxShadow":" 0px 4px 10px 0px rgba(0,0,0,0.3020)","margin":"20px auto 5px","color":"#000","display":"block","outline":"none","borderRadius":"80px","background":"linear-gradient(180deg, #DAE0FF 0%, #FFF8E3 100%)","width":"80%","fontSize":"18px","height":"44px"}'
+            type="button" class="r-btn" @click="login()">注册
+        </button>
+        <div
+            :style='{"cursor":"pointer","padding":"0 10%","margin":"20px 0","color":"rgba(159, 159, 159, 1)","textAlign":"center","display":"inline-block","width":"100%","lineHeight":"1","fontSize":"12px","textDecoration":"underline"}'
+            class="r-login" @click="close()">已有账号，直接登录
+        </div>
+      </el-form>
 
-	<div class="container" :style='{"minHeight":"100vh","alignItems":"center","background":"url(http://codegen.caihongy.cn/20230109/cc084b475fe046298dc937f1cc43f1a3.jpg) no-repeat center top / 100% 100%","display":"flex","width":"100%","backgroundSize":"cover","backgroundPosition":"center center","backgroundRepeat":"no-repeat","justifyContent":"center"}'>
-		<el-form class='rgs-form' v-if="pageFlag=='register'" :style='{"border":"1px solid #ccc","padding":"20px 2%","margin":"0","borderRadius":"10px","flexWrap":"wrap","background":"rgba(255,255,255,.9)","display":"flex","width":"750px","justifyContent":"center","height":"auto"}' ref="registerForm" :model="registerForm" :rules="rules">
-			<div v-if="false" :style='{"margin":"0 0 10px 0","color":"rgba(64, 158, 255, 1)","textAlign":"center","width":"100%","lineHeight":"44px","fontSize":"20px","textShadow":"4px 4px 2px rgba(64, 158, 255, .5)"}'>USER / REGISTER</div>
-			<div v-if="true" :style='{"width":"100%","margin":"0 auto 20px","lineHeight":"44px","fontSize":"20px","color":"#aa844c","textAlign":"center"}'>基于javaweb的随心购商城注册</p></div>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="shangjiabianhao">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>商家编号：</div>
-				<el-input v-model="registerForm.shangjiabianhao"  placeholder="请输入商家编号" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="mima">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>密码：</div>
-				<el-input v-model="registerForm.mima" type="password" placeholder="请输入密码" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="mima">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>确认密码：</div>
-				<el-input v-model="registerForm.mima2" type="password" placeholder="请再次输入密码" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="shangjiamingcheng">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>商家名称：</div>
-				<el-input v-model="registerForm.shangjiamingcheng"  placeholder="请输入商家名称" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="tupian">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>图片：</div>
-                <file-upload
-					tip="点击上传图片"
-					action="file/upload"
-					:limit="1"
-					:multiple="true"
-					:fileUrls="registerForm.tupian?registerForm.tupian:''"
-					@change="shangjiatupianUploadChange"
-				></file-upload>
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="lianxidianhua">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>联系电话：</div>
-				<el-input v-model="registerForm.lianxidianhua"  placeholder="请输入联系电话" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="shangjiadizhi">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>商家地址：</div>
-				<el-input v-model="registerForm.shangjiadizhi"  placeholder="请输入商家地址" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='shangjia'" prop="jingyingfanwei">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>经营范围：</div>
-				<el-input v-model="registerForm.jingyingfanwei"  placeholder="请输入经营范围" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="yonghuming">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>用户名：</div>
-				<el-input v-model="registerForm.yonghuming"  placeholder="请输入用户名" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="mima">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>密码：</div>
-				<el-input v-model="registerForm.mima" type="password" placeholder="请输入密码" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="mima">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>确认密码：</div>
-				<el-input v-model="registerForm.mima2" type="password" placeholder="请再次输入密码" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="xingming">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>姓名：</div>
-				<el-input v-model="registerForm.xingming"  placeholder="请输入姓名" />
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="xingbie">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>性别：</div>
-                <el-select v-model="registerForm.xingbie" placeholder="请选择性别" >
-                  <el-option
-                      v-for="(item,index) in yonghuxingbieOptions"
-                      :key="index"
-                      :label="item"
-                      :value="item">
-                  </el-option>
-                </el-select>
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="touxiang">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>头像：</div>
-                <file-upload
-					tip="点击上传头像"
-					action="file/upload"
-					:limit="1"
-					:multiple="true"
-					:fileUrls="registerForm.touxiang?registerForm.touxiang:''"
-					@change="yonghutouxiangUploadChange"
-				></file-upload>
-			</el-form-item>
-			<el-form-item :style='{"width":"100%","padding":"0 8%","margin":"0 auto 30px","height":"auto"}' v-if="tableName=='yonghu'" prop="shouji">
-				<div v-if="false" :style='{"width":"64px","lineHeight":"44px","fontSize":"14px","color":"rgba(64, 158, 255, 1)"}'>手机：</div>
-				<el-input v-model="registerForm.shouji"  placeholder="请输入手机" />
-			</el-form-item>
-			<el-button :style='{"border":"0","cursor":"pointer","padding":"0 10px","margin":"20px ","outline":"none","color":"#fff","borderRadius":"8px","background":"#cca162","display":"inline-block","width":"20%","fontSize":"16px","height":"44px"}' type="primary" @click="submitForm('registerForm')">注册</el-button>
-			<el-button :style='{"border":"0","cursor":"pointer","padding":"0 10px","margin":"20px ","outline":"none","color":"#fff","borderRadius":"8px","background":"#999999","display":"inline-block","width":"20%","fontSize":"16px","height":"44px"}' @click="resetForm('registerForm')">重置</el-button>
-			<router-link :style='{"cursor":"pointer","padding":"0 10%","color":"rgba(159, 159, 159, 1)","textAlign":"right","display":"inline-block","width":"100%","lineHeight":"2","fontSize":"12px","textDecoration":"none"}' to="/login">已有账户登录</router-link>
-		</el-form>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 
 export default {
-    //数据集合
-    data() {
-		return {
-            pageFlag : '',
-			tableName: '',
-			registerForm: {
-                xingbie: '',
-            },
-			rules: {},
-            yonghuxingbieOptions: [],
-		}
+  data() {
+    return {
+      ruleForm: {},
+
+      pageFlag: '',
+      tableName: "",
+      rules: {},
+    };
+  },
+  mounted() {
+    this.pageFlag = this.$storage.get("pageFlag");
+    let table = this.$storage.get("loginTable");
+    this.tableName = table;
+  },
+  created() {
+
+  },
+  destroyed() {
+  },
+  methods: {
+    // 获取uuid
+    getUUID() {
+      return new Date().getTime();
     },
-	mounted() {
-	},
-    created() {
-      this.pageFlag = this.$route.query.pageFlag;
-      this.tableName = this.$route.query.role;
-      if ('shangjia' == this.tableName) {
-        this.rules.shangjiabianhao = [{ required: true, message: '请输入商家编号', trigger: 'blur' }];
-      }
-      if ('shangjia' == this.tableName) {
-        this.rules.mima = [{ required: true, message: '请输入密码', trigger: 'blur' }];
-      }
-      if ('shangjia' == this.tableName) {
-        this.rules.lianxidianhua = [{ required: true, validator: this.$validate.isMobile, trigger: 'blur' }];
-      }
-      if ('shangjia' == this.tableName) {
-        this.rules.money = [{ required: true, validator: this.$validate.isNumber, trigger: 'blur' }];
-      }
-      if ('yonghu' == this.tableName) {
-        this.rules.yonghuming = [{ required: true, message: '请输入用户名', trigger: 'blur' }];
-      }
-      if ('yonghu' == this.tableName) {
-        this.rules.mima = [{ required: true, message: '请输入密码', trigger: 'blur' }];
-      }
-      if ('yonghu' == this.tableName) {
-        this.rules.xingming = [{ required: true, message: '请输入姓名', trigger: 'blur' }];
-      }
-        this.yonghuxingbieOptions = "男,女".split(',');
-      if ('yonghu' == this.tableName) {
-        this.rules.shouji = [{ required: true, validator: this.$validate.isMobile, trigger: 'blur' }];
-      }
-      if ('yonghu' == this.tableName) {
-        this.rules.money = [{ required: true, validator: this.$validate.isNumber, trigger: 'blur' }];
-      }
+    close() {
+      this.$router.push({path: "/login"});
     },
-    //方法集合
-    methods: {
-      // 获取uuid
-      getUUID () {
-        return new Date().getTime();
-      },
-        // 下二随
-      shangjiatupianUploadChange(fileUrls) {
-          this.registerForm.tupian = fileUrls.replace(new RegExp(this.$config.baseUrl,"g"),"");
-      },
-      yonghutouxiangUploadChange(fileUrls) {
-          this.registerForm.touxiang = fileUrls.replace(new RegExp(this.$config.baseUrl,"g"),"");
-      },
 
-        // 多级联动参数
+    // 多级联动参数
 
 
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            var url=this.tableName+"/register";
-               if(`shangjia` == this.tableName && this.registerForm.mima!=this.registerForm.mima2) {
-                this.$message.error(`两次密码输入不一致`);
-                return
-               }
-               if(`yonghu` == this.tableName && this.registerForm.mima!=this.registerForm.mima2) {
-                this.$message.error(`两次密码输入不一致`);
-                return
-               }
-            this.$http.post(url, this.registerForm).then(res => {
-              if (res.data.code === 0) {
-                this.$message({
-                  message: '注册成功',
-                  type: 'success',
-                  duration: 1500,
-                  onClose: () => {
-                    this.$router.push('/login');
-                  }
-                });
-              } else {
-                this.$message.error(res.data.msg);
-              }
-            });
-          } else {
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      }
+    // 注册
+    login() {
+      var url = this.tableName + "/register";
+
+      this.$http({
+        url: url,
+        method: "post",
+        data: this.ruleForm
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+          this.$message({
+            message: "注册成功",
+            type: "success",
+            duration: 1500,
+            onClose: () => {
+              this.$router.replace({path: "/login"});
+            }
+          });
+        } else {
+          this.$message.error(data.msg);
+        }
+      });
     }
   }
+};
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-	.container {
-		position: relative;
-		background: url(http://codegen.caihongy.cn/20230109/cc084b475fe046298dc937f1cc43f1a3.jpg) no-repeat center top / 100% 100%;
+<style lang="scss" scoped>
+.container {
+  position: relative;
+  background: url(http://codegen.caihongy.cn/20220722/2f46ada029f940ea97c168e76044ca4d.png);
 
-		.el-date-editor.el-input {
-			width: 100%;
-		}
-		
-		.rgs-form .el-input /deep/ .el-input__inner {
-						border: 2px solid #eee;
-						border-radius: 8px;
-						padding: 0 10px;
-						outline: none;
-						color: #333;
-						width: 100%;
-						font-size: 14px;
-						height: 44px;
-					}
-		
-		.rgs-form .el-select /deep/ .el-input__inner {
-						border: 2px solid #eee;
-						border-radius: 8px;
-						padding: 0 10px;
-						outline: none;
-						color: #333;
-						width: 288px;
-						font-size: 14px;
-						height: 44px;
-					}
-		
-		.rgs-form .el-date-editor /deep/ .el-input__inner {
-						border: 2px solid #eee;
-						border-radius: 8px;
-						padding: 0 10px 0 30px;
-						outline: none;
-						color: #333;
-						width: 288px;
-						font-size: 14px;
-						height: 44px;
-					}
-		
-		.rgs-form .el-date-editor /deep/ .el-input__inner {
-						border: 2px solid #eee;
-						border-radius: 8px;
-						padding: 0 10px 0 30px;
-						outline: none;
-						color: #333;
-						width: 288px;
-						font-size: 14px;
-						height: 44px;
-					}
-		
-		.rgs-form /deep/ .el-upload--picture-card {
-			background: transparent;
-			border: 0;
-			border-radius: 0;
-			width: auto;
-			height: auto;
-			line-height: initial;
-			vertical-align: middle;
-		}
-		
-		.rgs-form /deep/ .upload .upload-img {
-		  		  border: 2px solid #eee;
-		  		  cursor: pointer;
-		  		  border-radius: 8px;
-		  		  color: #333;
-		  		  width: 80px;
-		  		  font-size: 32px;
-		  		  line-height: 80px;
-		  		  text-align: center;
-		  		  height: 80px;
-		  		}
-		
-		.rgs-form /deep/ .el-upload-list .el-upload-list__item {
-		  		  border: 2px solid #eee;
-		  		  cursor: pointer;
-		  		  border-radius: 8px;
-		  		  color: #333;
-		  		  width: 80px;
-		  		  font-size: 32px;
-		  		  line-height: 80px;
-		  		  text-align: center;
-		  		  height: 80px;
-		  		}
-		
-		.rgs-form /deep/ .el-upload .el-icon-plus {
-		  		  border: 2px solid #eee;
-		  		  cursor: pointer;
-		  		  border-radius: 8px;
-		  		  color: #333;
-		  		  width: 80px;
-		  		  font-size: 32px;
-		  		  line-height: 80px;
-		  		  text-align: center;
-		  		  height: 80px;
-		  		}
-	}
+  .el-date-editor.el-input {
+    width: 100%;
+  }
+
+  .rgs-form .el-input /deep/ .el-input__inner {
+    border: 0;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3020);
+    outline: none;
+    color: rgba(64, 158, 255, 1);
+    width: 100%;
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .rgs-form .el-select /deep/ .el-input__inner {
+    border: 0;
+    border-radius: 80px;
+    padding: 0 10px;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3020);
+    outline: none;
+    color: #333;
+    width: 368px;
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .rgs-form .el-date-editor /deep/ .el-input__inner {
+    border: 0;
+    border-radius: 80px;
+    padding: 0 10px 0 30px;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3020);
+    outline: none;
+    color: #333;
+    width: 100%;
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .rgs-form .el-date-editor /deep/ .el-input__inner {
+    border: 0;
+    border-radius: 80px;
+    padding: 0 10px 0 30px;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3020);
+    outline: none;
+    color: #333;
+    width: 100%;
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .rgs-form /deep/ .el-upload--picture-card {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    line-height: initial;
+    vertical-align: middle;
+  }
+
+  .rgs-form /deep/ .upload .upload-img {
+    border: 1px dashed rgba(0, 0, 0, 0.3020);
+    cursor: pointer;
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 0.3020);
+    width: 100px;
+    font-size: 32px;
+    line-height: 100px;
+    text-align: center;
+    height: 100px;
+  }
+
+  .rgs-form /deep/ .el-upload-list .el-upload-list__item {
+    border: 1px dashed rgba(0, 0, 0, 0.3020);
+    cursor: pointer;
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 0.3020);
+    width: 100px;
+    font-size: 32px;
+    line-height: 100px;
+    text-align: center;
+    height: 100px;
+  }
+
+  .rgs-form /deep/ .el-upload .el-icon-plus {
+    border: 1px dashed rgba(0, 0, 0, 0.3020);
+    cursor: pointer;
+    border-radius: 8px;
+    color: rgba(0, 0, 0, 0.3020);
+    width: 100px;
+    font-size: 32px;
+    line-height: 100px;
+    text-align: center;
+    height: 100px;
+  }
+}
 </style>

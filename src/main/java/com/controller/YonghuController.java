@@ -51,9 +51,6 @@ import java.io.IOException;
 public class YonghuController {
     @Autowired
     private YonghuService yonghuService;
-
-
-    
 	@Autowired
 	private TokenService tokenService;
 	
@@ -71,8 +68,6 @@ public class YonghuController {
 		String token = tokenService.generateToken(u.getId(), username,"yonghu",  "用户" );
 		return R.ok().put("token", token);
 	}
-
-	
 	/**
      * 注册
      */
@@ -89,8 +84,6 @@ public class YonghuController {
         yonghuService.insert(yonghu);
         return R.ok();
     }
-
-	
 	/**
 	 * 退出
 	 */
@@ -99,7 +92,6 @@ public class YonghuController {
 		request.getSession().invalidate();
 		return R.ok("退出成功");
 	}
-	
 	/**
      * 获取用户的session用户信息
      */
@@ -109,7 +101,6 @@ public class YonghuController {
         YonghuEntity u = yonghuService.selectById(id);
         return R.ok().put("data", u);
     }
-    
     /**
      * 密码重置
      */
@@ -124,8 +115,6 @@ public class YonghuController {
         yonghuService.updateById(u);
         return R.ok("密码已重置为：123456");
     }
-
-
     /**
      * 后端列表
      */

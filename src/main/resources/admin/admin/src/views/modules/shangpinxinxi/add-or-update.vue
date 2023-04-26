@@ -412,7 +412,7 @@ export default {
         this.ruleForm = data.data;
         //解决前台上传图片后台不显示的问题
         let reg=new RegExp('../../../upload','g')//g代表全部
-        this.ruleForm.shangpinxiangqing = this.ruleForm.shangpinxiangqing.replace(reg,'../../../WebShop/upload');
+        this.ruleForm.shangpinxiangqing = this.ruleForm.shangpinxiangqing.replace(reg,'../../../springboot94k98/upload');
         } else {
           this.$message.error(data.msg);
         }
